@@ -11,7 +11,6 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    
     <header>
         {% include './shared/menu.html' %}
     </header>
@@ -28,16 +27,14 @@
         </script>
     {% endif %}
 
-
     <main>
-
         <div class="container mt-5">
             <div class="row">
                 <div class="col-12 col-md-5">
-                    <img src="../static/img/vegetales.webp" alt="vegetales" class="w-100 img-fluid">
+                    <img src="../static/img/fondoEmpleados.jpg" alt="oficina" class="w-100 img-fluid">
                 </div>
                 <div class="col-12 col-md-7">
-                    <h2>Registro de platos</h2>
+                    <h2>Registro de empleados</h2>
                     <form method="POST">
                         {{formulario}}
                         {% csrf_token %}
@@ -46,19 +43,17 @@
                 </div>
             </div>
         </div>
-
     </main>
 
     <section>
         <div class="container">
             <div class="row row-cols-1 row-cols-md-4">
-                {% for plato in platos %}
-                <div class="card mt-5 mb-4" style="width: 18rem;">
-                
+                {% for empleado in empleados %}
+                <div class="card mt-5 mb-4" style="width: 18rem;">             
                     <div class="card-body">
-                      <h5 class="card-title">{{plato.nombre}}</h5>
-                      <p class="card-text">{{plato.descripcion}}</p>
-                      <p class="card-text">{{plato.precio}}</p>
+                      <h5 class="card-title">{{empleado.nombre}}</h5>
+                      <p class="card-text">{{empleado.apellido}}</p>
+                      <p class="card-text">{{empleado.cargo}}</p>
                     </div>
                   </div>
                 {% endfor %}
@@ -82,6 +77,5 @@
             </div>
         </div>
     </footer>
-
 </body>
 </html>

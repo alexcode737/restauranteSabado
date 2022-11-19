@@ -2,7 +2,11 @@ from django.shortcuts import render
 
 from web.formularios.formularioPlatos import FormularioPlatos
 
+from web.formularios.formularioEmpleados import FormularioEmpleados
+
 from web.models import Platos
+
+from web.models import Empleados
 
 # Create your views here.
 
@@ -56,3 +60,39 @@ def PlatosVista(request):
                 data["bandera"]=False
 
     return render(request,'menuplatos.html',data)
+
+
+def EmpleadosVista(request):
+    empleadosConsultados = Empleados.objects.all()
+    print(empleadosConsultados)
+
+    formularioEmpleados = FormularioEmpleados()
+
+    data={
+        'formulario':formularioEmpleados,
+        'bandera':False,
+        'empleados':empleadosConsultados
+    }
+
+    if request.method=='POST':
+        datosDelFormulario=FormularioEmpleados(request.POST)
+
+        if datosDelFormulario.is_valid():
+            datosEmpleado=datosDelFormulario.cleaned_data
+            empleadoNuevo = Empleados(
+                nombre = datosEmpleado["nombre"],
+                apellido = datosEmpleado["apellido"],
+                cargo = datosEmpleado["cargo"]
+            )
+
+            try:
+                empleadoNuevo.save()
+                data["bandera"]=True
+                print("Exito guardando los datos")
+            
+            except Exception as error:
+                print("error",error)
+                data["bandera"]=False
+
+    return render(request,'menuempleados.html',data)
+

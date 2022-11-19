@@ -11,7 +11,7 @@ class FormularioPlatos(forms.Form):
     nombre=forms.CharField(
         required=True,
         max_length=5,
-        label='Nombre Empleado: ',
+        label='Nombre Plato: ',
         widget=forms.TextInput(attrs={'class':'form-control mb-3'})
     )
     descripcion=forms.CharField(
